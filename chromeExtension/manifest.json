@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+
+  "name": "gifJukebox",
+  "description": "This extension blasts gifs to the big screen",
+  "version": "1.0",
+    "background": {
+    "persistent": false,
+    "scripts": ["background.js"]
+  },
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": "black.png"
+  },
+  "permissions": [
+    "http://*/","tabs"
+  ]
+}

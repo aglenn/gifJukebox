@@ -1,6 +1,6 @@
 var MessageIO = Class.extend({
                 init: function(opencallback) {
-                    log("opening connection to " + window.location.hostname);
+                    //log("opening connection to " + window.location.hostname);
                     this.ws = new WebSocket('ws://localhost:9000');
                     this.ws.binaryType = 'arraybuffer';
                     
@@ -16,7 +16,7 @@ var MessageIO = Class.extend({
                 },
                 onMessage: function(e) {
                     var m = JSON.parse(e.data);
-                    log("Got Message: " + m.url);
+                    log(m.url);
                     var image = document.getElementById("gifPortal");
                     image.src = m.url;
                 }});
@@ -25,18 +25,17 @@ var messager;
 
 window.onload = function start() {
     messager = new MessageIO(function() {
-        log("Socket Connected");
+        //log("Socket Connected");
         send();
     });
 }
 
 function send() {
-    log("Send");
+    //log("Send");
     messager.ws.send("Give me gif!");
 }
 
 function log(message) {
     var log = document.getElementById("logput");
-    var logtext = log.innerHTML;
-    log.innerHTML = logtext + message + "<br>";
+    log.innerHTML = message;
 }

@@ -1,5 +1,19 @@
 p {
-    background-color: #CCCCCC;
+    color: #FFFFFF;    
     padding: 5px;
-    width: 25%
+    width: 100%;
+    text-align: center
+}
+
+table {
+    width: 100%;
+    height: 100%;
+}
+
+img {
+    width: 100%;
+}
+
+body {
+    background-color: #000000;
 }

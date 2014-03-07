@@ -54,7 +54,7 @@ class WebResource(resource.Resource):
     def render_POST(self, request):
       jresult = json.loads(request.content.read())
       factory.broadcast(jresult)
-      command = "curl " + jresult["url"] + " > gifs/" + jresult["url"].split("/")[-1]
+      command = "curl " + jresult["url"] + " > gifs/" + jresult["url"].split("/")[-1] + " &"
       os.system(command)
       return json.dumps({"status":"1"})
 
