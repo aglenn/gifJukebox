@@ -22,6 +22,7 @@ class SocketProtocol(WebSocketServerProtocol):
 
    def onClose(self, wasClean, code, reason):
       print("WebSocket connection closed: {0}".format(reason))
+      self.factory.unregister(self);
 
 class PostableSocketFactory(WebSocketServerFactory):
 
