@@ -3,7 +3,7 @@
 
   "name": "gifJukebox",
   "description": "This extension blasts gifs to the big screen",
-  "version": "1.0",
+  "version": "1.1",
     "background": {
     "persistent": false,
     "scripts": ["background.js"]
