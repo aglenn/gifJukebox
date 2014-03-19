@@ -5,6 +5,8 @@ import json
 import time
 import os
 
+lastBroadcast = json.dumps({"url":"http://alexwglenn.com/brady/gifs/Alex.gif"});
+
 class SocketProtocol(WebSocketServerProtocol):
 
    def onConnect(self, request):
@@ -17,8 +19,8 @@ class SocketProtocol(WebSocketServerProtocol):
 
    def onMessage(self, payload, isBinary):
       print("Message received: {0}".format(payload.decode('utf8')))
-
-      self.sendMessage(json.dumps({"url":"http://alexwglenn.com/brady/gifs/Alex.gif"}), False);
+      print("sending last broadcast: " + lastBroadcast)
+      self.sendMessage(lastBroadcast, False);
 
    def onClose(self, wasClean, code, reason):
       print("WebSocket connection closed: {0}".format(reason))
@@ -41,6 +43,7 @@ class PostableSocketFactory(WebSocketServerFactory):
          self.clients.remove(client)
 
    def broadcast(self, msg):
+      lastBroadcast = json.dumps(msg)
       print("broadcasting message '{}' ..".format(json.dumps(msg)))
       print("To " + str(len(self.clients)) + " clients")
       for c in self.clients:
@@ -52,7 +55,7 @@ class WebResource(resource.Resource):
     isLeaf = True
     def render_GET(self, request):
         return "gifFactory"
-    def render_POST(self, request):
+    def render_POST(self, request):      
       jresult = json.loads(request.content.read())
       factory.broadcast(jresult)
       command = "curl " + jresult["url"] + " > gifs/" + jresult["url"].split("/")[-1] + " &"

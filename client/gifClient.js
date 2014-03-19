@@ -1,7 +1,7 @@
 var MessageIO = Class.extend({
                 init: function(opencallback) {
                     //log("opening connection to " + window.location.hostname);
-                    this.ws = new WebSocket('ws://gifjukebox.com:9000');
+                    this.ws = new WebSocket('ws://localhost:9000');
                     this.ws.binaryType = 'arraybuffer';
                     
                     var me = this;
