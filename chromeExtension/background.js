@@ -17,7 +17,7 @@ function pressed() {
                 xhr.open("POST", "http://"+ ipAddress + ":" + portNumber, true);
             }
             else {
-                xhr.open("POST", "http://localhost:8080", true);
+                xhr.open("POST", "http://gifjukebox.com:8080", true);
             }
             xhr.setRequestHeader("Content-type", "application/json");
             //xhr.setRequestHeader("Content-length", params.length);

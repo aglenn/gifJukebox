@@ -13,7 +13,7 @@ function save_options() {
   status.innerHTML = "Options Saved.";
   setTimeout(function() {
     status.innerHTML = "";
-  }, 750);
+  }, 1000);
 }
 
 // Restores select box state to saved value from localStorage.
@@ -31,5 +31,23 @@ function restore_options() {
     }
 
 }
+
+function clear_options() {
+    localStorage.removeItem("ip_address");
+    localStorage.removeItem("port");
+    var ip = document.getElementById("ip");
+    ip.value = "";
+    
+    var port = document.getElementById("port");
+    port.value = "";
+    
+    var status = document.getElementById("status");
+    status.innerHTML = "Options Reset.";
+    setTimeout(function() {
+        status.innerHTML = "";
+    }, 1000);
+}
+
 document.addEventListener('DOMContentLoaded', restore_options);
 document.querySelector('#save').addEventListener('click', save_options);
+document.querySelector('#clear').addEventListener('click', clear_options);
