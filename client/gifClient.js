@@ -50,7 +50,7 @@ function send() {
 }
 
 function log(message) {
-    var log = document.getElementById("logput");
-    log.innerHTML = message
+    //var log = document.getElementById("logput");
+    //log.innerHTML = message
     console.log(message);
 }
