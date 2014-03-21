@@ -8,7 +8,7 @@ import random
 
 gifRoot = "http://gifjukebox.com/gifs/"
 #gifRoot = "http://localhost:54767/client/gifs/"
-gifLoopTime = 10
+gifLoopTime = 12
 
 class SocketProtocol(WebSocketServerProtocol):
 
