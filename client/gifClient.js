@@ -1,3 +1,6 @@
+var messager;
+var retries = 0;
+
 var MessageIO = Class.extend({
                 init: function(opencallback) {
                     //log("opening connection to " + window.location.hostname);
@@ -8,11 +11,20 @@ var MessageIO = Class.extend({
                     this.ws.onmessage = function(e) {me.onMessage(e);};
                     this.ws.onopen = opencallback;
                     this.ws.onerror = function(err) {
-                        log("Socket connection error: " + err.data);
+                        log("Server connection error, retrying");
                     };
+                    this.ws.onclose = function() {
+                        if(retries > 10) {
+                            log("Server connection failure. Try refreshing later.");    
+                        }
+                        else {
+                            setTimeout(start, 2000);
+                            retries++;
+                        }
+                    }
                 },
                 send: function(msg) {
-                    this.ws.send(message);
+                    this.ws.send(message);                    
                 },
                 onMessage: function(e) {
                     var m = JSON.parse(e.data);
@@ -21,9 +33,11 @@ var MessageIO = Class.extend({
                     image.src = m.url;
                 }});
 
-var messager;
+window.onload = start;
 
-window.onload = function start() {
+function start() {
+    log("starting...");
+    delete messager;
     messager = new MessageIO(function() {
         //log("Socket Connected");
         send();
@@ -37,5 +51,6 @@ function send() {
 
 function log(message) {
     var log = document.getElementById("logput");
-    log.innerHTML = message;
+    log.innerHTML = message
+    console.log(message);
 }
