@@ -5,7 +5,10 @@ function pressed() {
         var lastString = url.split(".").pop();
         console.log("Last object was " + lastString);
 
-        if(lastString == "gif") {
+        if(lastString == "gif" || lastString == "gifv") {
+            
+            url = url.replace("gifv","mp4");
+            
             var xhr = new XMLHttpRequest();
             var params = '{"url":"' + url + '"}';
             //http.open("POST", "http://172.29.96.71:8080, true);

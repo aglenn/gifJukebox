@@ -30,7 +30,20 @@ var MessageIO = Class.extend({
                     var m = JSON.parse(e.data);
                     log(m.url);
                     var image = document.getElementById("gifPortal");
-                    image.src = m.url;
+                    var video = document.getElementById("gifvPortal");
+                    var lastString = m.url.split(".").pop();
+
+                    if(lastString == "gif") {
+                        image.src = m.url;
+                        image.style.display = 'initial'
+                        video.src = "";
+                        video.style.display = 'none';
+                    } else {
+                        image.src = "";
+                        image.style.display = 'none';
+                        video.src = m.url;
+                        video.style.display = 'initial'
+                    }
                 }});
 
 window.onload = start;
